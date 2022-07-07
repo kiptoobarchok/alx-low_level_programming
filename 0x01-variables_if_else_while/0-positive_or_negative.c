@@ -4,6 +4,7 @@
 
 /**
  *main - Entry point
+ *prints if a number is positive or negative or 0
  *
  * return : 0 success
  */
