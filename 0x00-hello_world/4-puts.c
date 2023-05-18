@@ -1,9 +1,10 @@
 #include <stdio.h>
 
 /**
-  * main - print "Programming is like building a multilingual puzzle
+  * main - This function starts the program
   *
-  * Return : 0(success)
+  * Description: print "Programming is like building a multilingual puzzle
+  * Return: 0(success)
   */
 
 int main(void)
