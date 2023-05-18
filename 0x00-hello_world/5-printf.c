@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
-  *main - This function starts the program 
+  *main - This function starts the program
   *
   *Description: prints with proper grammar, but the outcome is a piece of art,
   *Return: 0
