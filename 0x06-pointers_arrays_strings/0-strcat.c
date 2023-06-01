@@ -5,7 +5,7 @@
   *_strcat - function to concantenate 2 strings
   *@dest: string 1
   *@src: string 2
-  *Return: 0
+  *Return: linked string
   */
 
 char *_strcat(char *dest, char *src)
@@ -22,7 +22,7 @@ char *_strcat(char *dest, char *src)
 		dest++;
 		src++;
 	}
-	*dest = '\0';
+	
 
-	return (0);
+	return (dest);
 }
