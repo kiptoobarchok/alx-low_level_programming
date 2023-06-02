@@ -9,21 +9,22 @@
 
 void print_number(int n)
 {
-	if (n == 0)
-	{
-		_putchar(0);
-	}
+	unsigned int n_2;
 
 	if (n < 0)
 	{
 		_putchar('-');
-		n = -n;
+		n_2 = -n;
 	}
-
-	if (n >= 10)
+	else
 	{
-		print_number(n / 10);
+		n_2 = n;
 	}
 
-	_putchar('0' + (n % 10));
+	if (n_2 / 10)
+	{
+		print_number(n_2 / 10);
+	}
+
+	_putchar('0' + (n_2 % 10));
 }
