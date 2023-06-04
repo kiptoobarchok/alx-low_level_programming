@@ -18,11 +18,26 @@ void times_table(void)
 		{
 			int r = j * i;
 
-			_putchar(',');
-			_putchar(' ');
-			_putchar(' ');
-			_putchar('0' + (r / 10));
-			_putchar('0' + (r % 10));
+			if (j == 0)
+			{
+				_putchar(r + '0');
+			}
+
+			if (r < 10 && j != 0)
+			{
+				_putchar(',');
+				_putchar(' ');
+				_putchar(' ');
+				_putchar(r + '0');
+
+			}
+			else if (r >= 10)
+			{
+				_putchar(',');
+				_putchar(' ');
+				_putchar((r / 10) + '0');
+				_putchar((r % 10) + '0');
+			}
 		}
 		_putchar('\n');
 	}
