@@ -11,13 +11,13 @@
 int main(int argc, char **argv)
 {
 	int i;
-	int mul;
+	int mul = 1;
 
 	if (argc > 2)
 	{
 		for (i = 0; i < argc; i++)
 		{
-			mul = i * atoi(argv[i]);
+			mul = (atoi(argv[1]) * (atoi(argv[2])));
 		}
 		printf("%d\n", mul);
 	}
