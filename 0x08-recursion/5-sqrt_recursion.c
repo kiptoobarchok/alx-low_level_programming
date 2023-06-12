@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include "main.h"
-
+int find_sqrt(int n, int start, int end);
 /**
   *_sqrt_recursion- function to return natural square root of a number
   *@n: the number
   *Return: -1 if n has no natual sqr root
   */
-int act_sqrrec(int n, int i);
 
 int _sqrt_recursion(int n)
 {
@@ -15,27 +14,40 @@ int _sqrt_recursion(int n)
 		return (-1);
 	}
 
-	return (act_sqrrec(n, 0));
+	return (find_sqrt(n, 0, n));
 
 }
 /**
-  *act_sqrrec- function to find natural squareroot of a number
+  *find_sqrt- function to find natural squareroot of a number
   *@n: the number
-  *@i: sqrroot
-  *Description: iterates through the number
+  *@start: parameter to represent range for searching sqrt
+  *@end: parameter to represent range for searching sqrt
   *Return: resulting sqrroot
   */
 
-int act_sqrrec(int n, int i)
+int find_sqrt(int n, int start, int end)
 {
-	if (i * i > n)
+	int mid = (start + end) / 2;
+	int sqr = mid * mid;
+
+	if (start > end)
 	{
 		return (-1);
 	}
-	if (i * i == n)
+
+	if (sqr == n)
 	{
-		return (i);
+		return (mid);
 
 	}
-	return (act_sqrrec(n, i + 1));
+
+	else if (sqr > n)
+	{
+		return (find_sqrt(n, start, mid - 1));
+	}
+	else
+	{
+		return (find_sqrt(n, mid + 1, end));
+	}
+
 }
