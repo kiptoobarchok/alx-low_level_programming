@@ -3,9 +3,10 @@
 #include "main.h"
 
 /**
-  *create_array- 
-  *@size:
-  *@c:
+  *create_array-function to create array of char
+  *& initialize with specific char
+  *@size: size of array
+  *@c: char to fill the array
   *Return: NULL if size = 0 or pointer to array
   */
 
