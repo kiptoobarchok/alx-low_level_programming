@@ -1,6 +1,7 @@
 #ifndef DOG_H
 #define DOG_h
 
+#pragma once
 typedef struct dog dog_name;
 /**
   *struct dog - structure that stores info
