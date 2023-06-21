@@ -11,35 +11,30 @@
 int main(int argc, char **argv)
 {
 
-	int b, i;
-	char *arr;
+	int i;
 
 	if (argc != 2)
 	{
 		printf("Error\n");
 		exit(1);
 	}
-
-	b = atoi(argv[1]);
-
-	if (b < 0)
+	if (atoi(argv[1]) < 0)
 	{
-		printf("Errror\n");
+		printf("Error\n");
 		exit(2);
 	}
 
-	arr = (char *)main;
-
-	for (i = 0; i < b ; i++)
+	while (i < atoi(argv[1]))
 	{
-		if (i == b - 1)
-		{
-			printf("%02hhx\n", arr[i]);
-			break;
-		}
+		printf("%02x", *((unsigned char *)main + i));
+		i++;
 
-		printf("%02hhx", arr[i]);
+		if (i < atoi(argv[1]))
+		{
+			putchar(' ');
+		}
 	}
+	putchar('\n');
 
 	return (0);
 }
