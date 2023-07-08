@@ -1,10 +1,10 @@
 #include "lists.h"
 
 /**
-  * delete_nodeint_at_index - function to delete index at given node
+  *delete_nodeint_at_index - function to delete index at given node
   *@head: head
   *@index: index of node to be deleted
-  *Reurn: (1 if success else -1)
+  *Return: (1 if success else -1)
   */
 
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
@@ -22,7 +22,7 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	{
 		*head = (*head)->next;
 		free(tem);
-		return(1);
+		return (1);
 	}
 
 	if (i < index - 1)
