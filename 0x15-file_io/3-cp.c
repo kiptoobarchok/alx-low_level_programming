@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 		n_char = read(file_from, buff, 1024);
 		if (n_char == -1)
 			no_file(-1, 0, argv);
-		
+
 		n_wr = write(file_to, buff, n_char);
 		if (n_wr == -1)
 			no_file(0, -1, argv);
