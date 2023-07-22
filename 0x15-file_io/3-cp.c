@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "%s\n", "Usage: cp file_from file_to");
 		exit(97);
 	}
+
 	file_from = open(argv[1], O_RDONLY);
 	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
 	no_file(file_from, file_to, argv);
@@ -50,9 +51,8 @@ int main(int argc, char *argv[])
 	{
 		n_char = read(file_from, buff, 1024);
 		if (n_char == -1)
-		{
 			no_file(-1, 0, argv);
-		}
+		
 		n_wr = write(file_to, buff, n_char);
 		if (n_wr == -1)
 			no_file(0, -1, argv);
@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
 		exit(100);
 	}
+
 	close_err = close(file_to);
 	if (close_err == -1)
 	{
