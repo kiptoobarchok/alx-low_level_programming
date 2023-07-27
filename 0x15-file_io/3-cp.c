@@ -2,73 +2,89 @@
 #include "main.h"
 
 /**
-  *no_file - function to check if file exists
-  *@file_from: file from
-  *@file_to: file to cpy text to
-  *@argv: arguement vector
-  */
-
-void no_file(int file_from, int file_to, char *argv[])
-{
-	if (file_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	if (file_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: can't write to %s\n", argv[1]);
-		exit(99);
-	}
-
-}
-
-/**
-  *main - entry point
+  *main - copies content of file to another
   *@argc: arguement count
   *@argv: arguement vector
   *Return: 0
   */
 int main(int argc, char *argv[])
 {
-	int file_from, file_to, close_err;
-	ssize_t n_char, n_wr;
-	char buff[1024];
+	int file_from, file_to, r, wr;
+	char *buff;
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "%s\n", "Usage: cp file_from file_to");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to");
 		exit(97);
 	}
-
+	buff = create_buff(argv[2]);
 	file_from = open(argv[1], O_RDONLY);
-	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
-	no_file(file_from, file_to, argv);
+	r = read(file_from, buff, 1024);
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
-	n_char = 1024;
+	do {
+		if (file_from == -1 || r == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buff);
+			exit(98);
+		}
+		wr = write(file_to, buff, r);
+		if (file_to == -1 || wr == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buff);
+			exit(99);
+		}
 
-	while (n_char == 1024)
-	{
-		n_char = read(file_from, buff, 1024);
-		if (n_char == -1)
-			no_file(-1, 0, argv);
+		r = read(file_from, buff, 1024);
+		file_to = open(argv[2], O_WRONLY | O_APPEND);
 
-		n_wr = write(file_to, buff, n_char);
-		if (n_wr == -1)
-			no_file(0, -1, argv);
-	}
-	close_err = close(file_from);
-	if (close_err == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
-		exit(100);
-	}
+	} while (r > 0);
+	free(buff);
+	close_f(file_from);
+	close_f(file_to);
 
-	close_err = close(file_to);
-	if (close_err == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
-		exit(100);
-	}
 	return (0);
+}
+
+/**
+  *close_f - close file descriptors
+  *@fd: file descriptor
+  */
+
+void close_f(int fd)
+{
+	int c = close(fd);
+
+	if (c == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
+}
+
+/**
+  *create_buff - buffer to allocate memory
+  *@file: name of file buffer
+  *
+  *Return: ptr to new allocated buffer
+  */
+
+char *create_buff(char *file)
+{
+	char *buff;
+
+	buff = malloc(sizeof(char) * 1024);
+
+	if (buff == NULL)
+	{
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", file);
+		exit(99);
+	}
+
+	return (buff);
 }
