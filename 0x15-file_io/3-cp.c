@@ -1,90 +1,74 @@
-#include <stdio.h>
 #include "main.h"
 
 /**
-  *main - copies content of file to another
+  *main- entry point
   *@argc: arguement count
-  *@argv: arguement vector
+  *@argv:arguement vector
   *Return: 0
   */
+
 int main(int argc, char *argv[])
 {
-	int file_from, file_to, r, wr;
-	char *buff;
+	int file_from, file_to, close_error;
+	ssize_t count_char, n_write;
+	char buffer[1024];
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to");
+		dprintf(STDERR_FILENO, "%s\n", "Usage: cp file_from file_to");
 		exit(97);
 	}
-	buff = create_buff(argv[2]);
 	file_from = open(argv[1], O_RDONLY);
-	r = read(file_from, buff, 1024);
-	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
+	err_file(file_from, file_to, argv);
 
-	do {
-		if (file_from == -1 || r == -1)
-		{
-			dprintf(STDERR_FILENO,
-				"Error: Can't read from file %s\n", argv[1]);
-			free(buff);
-			exit(98);
-		}
-		wr = write(file_to, buff, r);
-		if (file_to == -1 || wr == -1)
-		{
-			dprintf(STDERR_FILENO,
-				"Error: Can't write to %s\n", argv[2]);
-			free(buff);
-			exit(99);
-		}
+	count_char = 1024;
+	while (count_char == 1024)
+	{
+		count_char = read(file_from, buffer, 1024);
 
-		r = read(file_from, buff, 1024);
-		file_to = open(argv[2], O_WRONLY | O_APPEND);
+		if (count_char == -1)
+			err_file(-1, 0, argv);
 
-	} while (r > 0);
-	free(buff);
-	close_f(file_from);
-	close_f(file_to);
+		n_write = write(file_to, buffer, count_char);
 
+		if (n_write == -1)
+			err_file(0, -1, argv);
+	}
+	close_error = close(file_from);
+	if (close_error == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		exit(100);
+	}
+	close_error = close(file_to);
+	if (close_error == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		exit(100);
+	}
 	return (0);
 }
 
 /**
-  *close_f - close file descriptors
-  *@fd: file descriptor
+  *err_file- checks for successful file opening
+  *@file_from: file 1
+  *@file_to: file 2
+  *@argv: arguement vector
   */
 
-void close_f(int fd)
+void err_file(int file_from, int file_to, char **argv)
 {
-	int c = close(fd);
-
-	if (c == -1)
+	if (file_from == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(100);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
 	}
-}
 
-/**
-  *create_buff - buffer to allocate memory
-  *@file: name of file buffer
-  *
-  *Return: ptr to new allocated buffer
-  */
-
-char *create_buff(char *file)
-{
-	char *buff;
-
-	buff = malloc(sizeof(char) * 1024);
-
-	if (buff == NULL)
+	if (file_to == -1)
 	{
-		dprintf(STDERR_FILENO,
-			"Error: Can't write to %s\n", file);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
-
-	return (buff);
 }
+
