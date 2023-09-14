@@ -3,7 +3,7 @@
 /**
   *delete_dnodeint_at_index- function to delete node
   *@head: head
-  *index: pos of node
+  *@index: pos of node
   *Return: 1- success , -1 failed
   */
 
