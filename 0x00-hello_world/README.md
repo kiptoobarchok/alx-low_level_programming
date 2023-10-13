@@ -1,4 +1,4 @@
-# 0x00-python-hello_world
+# C - Hello world
 
   # *Concepts*
 
