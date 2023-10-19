@@ -1,6 +1,6 @@
 # 0x0A. C - argc, argv
 
-# Resources
+## Resources
 *Read or watch:*
 
 [Arguments to main](https://intranet.alxswe.com/rltoken/Jip_nI4tv2ybQZ-jV3fqJg)
