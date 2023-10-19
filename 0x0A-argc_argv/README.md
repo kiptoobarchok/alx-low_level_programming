@@ -12,7 +12,7 @@
 [how to compile with unused variables](https://intranet.alxswe.com/rltoken/MkOUE1ndq1UAx9Erk-AVbg)
 
 # Learning Objectives
-At the end of this project, you are expected to be able to explain to anyone, __without the help of Google__:
+At the end of this project, you are expected to _be_ able to explain to anyone, __without the help of Google__:
 
 # General
 
