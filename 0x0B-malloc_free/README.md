@@ -14,8 +14,8 @@ For this project, we expect you to look at this concept:
 [Dynamic memory allocation in C - malloc calloc realloc free (stop at 6:50)](https://intranet.alxswe.com/rltoken/pfGb2oVIYLO_1a8jtFGQYw)
 
 *man or help:*
-        >malloc
-        >free
+        malloc
+        free
 
 # Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
