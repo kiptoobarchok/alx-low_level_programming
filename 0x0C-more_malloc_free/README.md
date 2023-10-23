@@ -10,7 +10,7 @@ For this project, we expect you to look at this concept:
 [Do I cast the result of malloc?](https://intranet.alxswe.com/rltoken/3eJCLMz_URoyk6RYRZ2MyA)
 
 
-Man or help :    
+#### Man or help :    
     exit (3)
     calloc
     realloc
