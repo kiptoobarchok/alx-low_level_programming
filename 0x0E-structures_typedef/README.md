@@ -12,7 +12,7 @@ Read or watch:
 
 [typedef](https://intranet.alxswe.com/rltoken/aqqM2t7PLG5cyHaKwm5nBg)
 
-Programming in C by Stephen Kochan - Chapter 8, Working with Structures p163-189
+**_Programming in C by Stephen Kochan - Chapter 8, Working with Structures p163-189_**
 
 [The Lost Art of C Structure Packing (Advanced - not mandatory)](https://intranet.alxswe.com/rltoken/emb4ohNT7XKi8Peep5lyeA)
 
