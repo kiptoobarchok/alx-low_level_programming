@@ -1,7 +1,7 @@
 # 0x15-file_io on file I/O
 
 ## Resources
-Read or watch:                                     
+Read or watch:
 
 [File descriptors](https://intranet.alxswe.com/rltoken/Duva-9Fjyskt39R__Nnazg)
 
