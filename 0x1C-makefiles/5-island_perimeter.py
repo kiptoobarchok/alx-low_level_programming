@@ -1,10 +1,12 @@
 #!/usr/bin/python3
+"function to return perimeter of an island"
 
 
 def island_perimeter(grid):
     """
-    function to return perimeter of an island
-    represented by 1 and 0
+    grid represented by 1(land) and 0(water)
+    Returns:
+        perimeter of island
     """
     width = len(grid[0])
     height = len(grid)
