@@ -6,7 +6,6 @@ def island_perimeter(grid):
     function to return perimeter of an island
     represented by 1 and 0
     """
-
     width = len(grid[0])
     height = len(grid)
     size = 0
